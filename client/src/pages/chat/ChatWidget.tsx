@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import { queryChat } from '../../api/httpClient';
 import type { ChatMessage } from '../../interfaces/ChatMessage';
 
-const UnsafeComponent: FC<{ html: string }> = ({ html }) => {
-  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+const SafeComponent: FC<{ html: string }> = ({ html }) => {
+  return <div>{html}</div>;
 };
 
 export const ChatWidget: FC = () => {
@@ -80,7 +80,7 @@ export const ChatWidget: FC = () => {
             {msg.role === 'user' ? (
               msg.content
             ) : msg.content ? (
-              <UnsafeComponent html={msg.content} />
+              <SafeComponent html={msg.content} />
             ) : (
               'Chat API Error'
             )}
